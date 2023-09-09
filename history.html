@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='stylesheet' href='styles.css' type='text/css'>
+    <link rel='icon' type='image/x-icon' href='img/skocko.png'>
+    <script>
+
+        function init() {
+
+            let table = document.getElementById('table');
+
+            let data2 = localStorage.getItem('pokusaji');
+
+            for (let rowData of data2.split(';')) {
+                let splitData = rowData.split('#');
+                let nAtt = splitData[0];
+                let nTime = splitData[1];
+
+                console.log(nAtt, nTime);
+
+                let tr = document.createElement('tr');
+
+                let td1 = document.createElement('td');
+                td1.innerHTML = nAtt;
+                tr.appendChild(td1);
+
+                let td2 = document.createElement('td');
+                // td2.innerHTML = nTime;
+                td2.innerHTML = (nTime / 10) + 's';
+                tr.appendChild(td2);
+                table.append(tr);
+
+            };
+
+        };
+
+        function onChange() {
+            let c = document.getElementById('sort_by').value;
+            sortBy(c);
+        };
+
+        function sortBy(c) {
+            console.log(c);
+        };
+
+    </script>
+    <title>History</title>
+</head>
+
+<body onload='init()'>
+
+    <p>Sortiraj po:</p>
+    <select id='sort_by' onchange='onChange()'>
+
+        <option value='pokusaji'>po broju pokusaja</option>
+        <option value='vreme'>po vremenu</option>
+
+    </select>
+    <br><br><br>
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Broj pokusaja:</th>
+                <th>Vreme:</th>
+            </tr>
+
+        </thead>
+
+        <tbody id='table'>
+
+        </tbody>
+
+    </table>
+
+
+</body>
+
+</html>
